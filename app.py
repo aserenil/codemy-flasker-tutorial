@@ -26,7 +26,7 @@ ckeditor = CKEditor(app)
 # app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:password123@localhost/users"
 
 # Heroku
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL").replace("postgres", "postgresql")
 
 # Secret Key!
 app.config['SECRET_KEY'] = "muy super secret key that know one is supposed to know"
