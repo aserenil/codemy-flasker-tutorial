@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+{% extends 'base.html' %}
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h1 style="text-align: center">500 Internal Server Error</h1>
-<p style="text-align: center">Try Again...</p>
+{% block content %}
+    <h1 style="text-align: center">500 Internal Server Error</h1>
+    <p style="text-align: center">Try Again...</p>
+{% endblock %}
 </body>
 </html>
