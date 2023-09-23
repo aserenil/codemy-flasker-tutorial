@@ -14,8 +14,11 @@ from webforms import LoginForm, NamerForm, PasswordForm, PostForm, SearchForm, U
 
 # Create a Flask Instance
 app = Flask(__name__)
-# Add Database
 
+# Add CKEditor
+ckeditor = CKEditor(app)
+
+# Add Database
 # Old SQLite DB
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 
@@ -23,7 +26,8 @@ app = Flask(__name__)
 # app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:password123@localhost/users"
 
 # Heroku
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://ubcepvwptunxtg:93257a05a32c0572551af694cb692f942008ce808e8df2a3b6ad35eb8a3b5f30@ec2-34-236-103-63.compute-1.amazonaws.com:5432/ddmu7shtqt3sl1"
+app.config[
+    "SQLALCHEMY_DATABASE_URI"] = "postgresql://ubcepvwptunxtg:93257a05a32c0572551af694cb692f942008ce808e8df2a3b6ad35eb8a3b5f30@ec2-34-236-103-63.compute-1.amazonaws.com:5432/ddmu7shtqt3sl1"
 
 # Secret Key!
 app.config['SECRET_KEY'] = "muy super secret key that know one is supposed to know"
@@ -39,8 +43,6 @@ migrate = Migrate(app, db)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
-
-ckeditor = CKEditor(app)
 
 
 # Add Post Page
@@ -147,13 +149,11 @@ def dashboard():
         pic_name = str(uuid.uuid1()) + "_" + pic_filename
 
         # Save That Image
-        saver = request.files["profile_pic"]
-        # name_to_update.profile_pic.save(os.path.join(app.config["UPLOAD_FOLDER"]), pic_name)
-
+        name_to_update.profile_pic.save(os.path.join(app.config["UPLOAD_FOLDER"], pic_name))
         name_to_update.profile_pic = pic_name
+
         try:
             db.session.commit()
-            saver.save(os.path.join(app.config["UPLOAD_FOLDER"]), pic_name)
             flash("User Updated Successfully")
             return render_template(
                 "dashboard.html",
@@ -485,7 +485,6 @@ class Users(db.Model, UserMixin):
     password_hash = db.Column(db.String(128))
     # User Can Have Many Posts
     posts = db.relationship("Posts", backref="poster")
-
 
     @property
     def password(self):

@@ -43,8 +43,13 @@
                         <a href="{{ url_for('delete', id=current_user.id) }}" class="btn btn-danger btn-sm">Delete</a>
                     </div>
                     <div class="col-4">
-                        <img src="{{ url_for('static', filename='images/default_profile_pic.png') }}"
-                             style="float: right">
+                        {% if current_user.profile_pic %}
+                            <img src="{{ url_for('static', filename='images/' + current_user.profile_pic) }}"
+                                 width="200" style="float: right">
+                        {% else: %}
+                            <img src="{{ url_for('static', filename='images/default_profile_pic.png') }}" width="200"
+                                 style="float: right">
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -79,6 +84,7 @@
 
                 {{ form.profile_pic.label(class="form-label") }}
                 {{ form.profile_pic(class="form-control", value=name_to_update.profile_pic) }}
+                <br>
 
                 {{ form.submit(class="btn btn-secondary btn-sm") }}
             </form>
