@@ -475,7 +475,7 @@ class Users(db.Model, UserMixin):
     favorite_color = db.Column(db.String(120))
     about_author = db.Column(db.Text(), nullable=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
-    profile_pic = db.Column(db.String(2000), nullable=False)
+    profile_pic = db.Column(db.String(2000), nullable=True)
     # Do some password stuff!
     password_hash = db.Column(db.String(128))
     # User Can Have Many Posts
