@@ -17,9 +17,11 @@ app = Flask(__name__)
 # Add Database
 # Old SQLite DB
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://ubcepvwptunxtg:93257a05a32c0572551af694cb692f942008ce808e8df2a3b6ad35eb8a3b5f30@ec2-34-236-103-63.compute-1.amazonaws.com:5432/ddmu7shtqt3sl1"
 # New MySQL DB
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:password123@localhost/users"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:password123@localhost/users"
+
+# Heroku
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgres://ubcepvwptunxtg:93257a05a32c0572551af694cb692f942008ce808e8df2a3b6ad35eb8a3b5f30@ec2-34-236-103-63.compute-1.amazonaws.com:5432/ddmu7shtqt3sl1"
 
 # Secret Key!
 app.config['SECRET_KEY'] = "muy super secret key that know one is supposed to know"
